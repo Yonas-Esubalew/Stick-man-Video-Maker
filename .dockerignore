@@ -1,0 +1,11 @@
+.git/
+.venv/
+venv/
+python/
+ffmpeg/ffmpeg.exe
+output/
+__pycache__/
+*.py[cod]
+server.log
+.env
+.env.*

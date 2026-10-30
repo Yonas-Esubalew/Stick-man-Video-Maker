@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRT Video Generator</title>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">
+        LOCAL VIDEO TOOL <span id="app-version">v--</span>
+        <span class="developer-credit">Developed by: Bahaa Mahmoud -
+          <a href="https://BahaaMahmoud.com" target="_blank" rel="noopener noreferrer">BahaaMahmoud.com</a> -
+          <a href="https://Bahaa-ai.com" target="_blank" rel="noopener noreferrer">Bahaa-ai.com</a>
+        </span>
+      </p>
+      <div class="brand-lockup">
+        <span class="app-mark" aria-hidden="true"></span>
+        <h1 id="app-name">SRT Video Generator</h1>
+      </div>
+      <p id="app-description" class="intro">Create timestamp-synchronized slideshow videos from images, SRT subtitles, and optional audio.</p>
+    </header>
+
+    <div class="workspace">
+      <form id="generator-form" class="controls">
+        <fieldset class="field-group ratio-group">
+          <legend>Video aspect ratio</legend>
+          <label class="radio-option">
+            <input type="radio" name="aspect_ratio" value="16:9" checked>
+            <span>16:9 <small>Landscape</small></span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="aspect_ratio" value="9:16">
+            <span>9:16 <small>Portrait</small></span>
+          </label>
+        </fieldset>
+
+        <section class="field-group">
+          <label for="image-folder">Images</label>
+          <input id="image-folder" name="images" type="file" accept="image/*" webkitdirectory multiple required>
+          <p id="image-summary" class="hint">Choose a folder. Natural filename order is used.</p>
+        </section>
+
+        <section class="field-group">
+          <label for="srt-file">Subtitle timing</label>
+          <input id="srt-file" name="srt_file" type="file" accept=".srt,text/srt" required>
+          <p id="srt-summary" class="hint">Select the SRT file whose cue times control the slideshow.</p>
+        </section>
+
+        <section class="field-group">
+          <label for="audio-file">Audio <span class="optional">(optional)</span></label>
+          <input id="audio-file" name="audio_file" type="file" accept="audio/*">
+          <p id="audio-summary" class="hint">Add music or narration to the video.</p>
+        </section>
+
+        <label class="checkbox-row" for="apply-zoom">
+          <input id="apply-zoom" name="apply_zoom" type="checkbox" checked>
+          <span>Apply animated zoom <small>Zoom each image between 100% and 105%.</small></span>
+        </label>
+
+        <label class="checkbox-row" for="apply-sfx">
+          <input id="apply-sfx" name="apply_sfx" type="checkbox" checked>
+          <span>Play image-change sound <small>Play the bundled click sound whenever a new image starts.</small></span>
+        </label>
+
+        <div class="actions">
+          <button id="generate-button" type="submit">Generate video</button>
+          <button id="cancel-button" class="cancel-button" type="button" hidden>Cancel</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <section id="progress-panel" class="progress-panel" hidden>
+          <div class="progress-heading">
+            <strong id="progress-label">Preparing...</strong>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+          <p id="progress-detail" class="hint">Waiting to start...</p>
+        </section>
+        <aside class="note">
+          <strong>Timing</strong>
+          <span>Each image begins at its matching SRT cue. The final image remains visible for the final cue duration.</span>
+        </aside>
+      </form>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="panel-heading">
+          <h2 id="preview-title">Generated video</h2>
+          <span id="preview-state" class="preview-state">No video yet</span>
+        </div>
+        <div id="preview-empty" class="preview-empty">Your finished video will appear here.</div>
+        <video id="video-preview" controls playsinline hidden></video>
+        <button id="download-button" class="download-button" type="button" hidden>Download video</button>
+      </section>
+    </div>
+
+  </main>
+  <script src="/config.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

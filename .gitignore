@@ -1,0 +1,13 @@
+.venv/
+venv/
+python/
+ffmpeg/ffmpeg.exe
+output/
+__pycache__/
+*.py[cod]
+server.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
